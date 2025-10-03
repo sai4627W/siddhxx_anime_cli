@@ -1,0 +1,453 @@
+{% extends "base.html" %}
+
+{% block title %}Stream - {{ episode_title }}{% endblock %}
+
+{% block content %}
+<!-- Cyber Streaming Header -->
+<section class="py-20 bg-dark-cyber relative overflow-hidden">
+    <div class="absolute inset-0 bg-neon-gradient opacity-15"></div>
+
+    <!-- Neural Scan Lines -->
+    <div class="absolute inset-0 overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-transparent via-blue-400 to-transparent animate-pulse opacity-50"></div>
+        <div class="absolute bottom-0 left-0 w-full h-2 bg-gradient-to-r from-transparent via-purple-500 to-transparent animate-pulse opacity-50" style="animation-delay: 0.5s;"></div>
+    </div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+            <!-- Streaming Status Icon -->
+            <div class="flex justify-center mb-12 animate-scale-in">
+                <div class="relative">
+                    <div class="w-32 h-32 bg-neon-gradient rounded-full flex items-center justify-center animate-float">
+                        <i class="fas fa-play text-white text-5xl animate-pulse"></i>
+                    </div>
+                    <div class="absolute inset-0 border-8 border-transparent border-t-blue-400 border-r-purple-500 rounded-full animate-spin" style="animation-duration: 3s;"></div>
+                    <div class="absolute inset-0 bg-neon-gradient rounded-full blur-3xl opacity-40 animate-pulse"></div>
+                </div>
+            </div>
+
+            <!-- Stream Title -->
+            <h1 class="text-3xl md:text-5xl font-orbitron font-black text-white mb-8 animate-slide-up">
+                <div class="text-blue-400 mb-2">NOW.STREAMING</div>
+                <div class="text-neon-gradient animate-neon-glow">{{ episode_title.upper() }}</div>
+            </h1>
+
+            <!-- Language Display -->
+            <div class="glass-neon inline-block px-8 py-4 rounded-2xl mb-8 animate-fade-in cyber-border" style="animation-delay: 0.2s;">
+                <div class="flex items-center justify-center space-x-4">
+                    <i class="fas fa-language text-green-400 text-2xl animate-pulse"></i>
+                    <span class="font-mono font-bold text-lg text-white">
+                        {% if language == 'sub' %}
+                            🇯🇵 JAPANESE.AUDIO + NEURAL.SUBTITLES
+                        {% else %}
+                            🇺🇸 ENGLISH.AUDIO + VOICE.SYNTHESIS
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+
+            <!-- Streaming Status -->
+            <div class="flex justify-center space-x-8 animate-fade-in" style="animation-delay: 0.4s;">
+                <div class="flex items-center space-x-2 text-green-400">
+                    <div class="w-4 h-4 bg-green-400 rounded-full animate-ping"></div>
+                    <span class="font-mono text-sm font-bold">STREAM.LIVE</span>
+                </div>
+                <div class="flex items-center space-x-2 text-blue-400">
+                    <div class="w-4 h-4 bg-blue-400 rounded-full animate-ping"></div>
+                    <span class="font-mono text-sm font-bold">ULTRA.HD</span>
+                </div>
+                <div class="flex items-center space-x-2 text-purple-400">
+                    <div class="w-4 h-4 bg-purple-400 rounded-full animate-ping"></div>
+                    <span class="font-mono text-sm font-bold">SECURE.LINK</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% if streaming_links %}
+<!-- Primary Streaming Interface -->
+<section class="py-16 bg-gradient-to-b from-gray-900 to-black relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Main Player Console -->
+        <div class="mb-16 animate-fade-in">
+            <div class="glass-neon rounded-3xl shadow-2xl border-2 border-blue-500/30 overflow-hidden cyber-border">
+                <!-- Player Header -->
+                <div class="bg-neon-gradient p-8 relative overflow-hidden">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-16 h-16 bg-black/30 rounded-2xl flex items-center justify-center animate-float">
+                                <i class="fas fa-play-circle text-white text-3xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-orbitron font-bold text-white">PRIMARY.STREAM.INTERFACE</h3>
+                                <p class="text-white/90 font-mono">Neural-optimized playback system</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <span class="glass-cyber px-4 py-2 rounded-full text-white font-mono text-sm font-bold animate-pulse">
+                                QUANTUM.QUALITY
+                            </span>
+                            <span class="bg-green-500/20 border border-green-500/50 px-4 py-2 rounded-full text-green-400 font-mono text-sm font-bold">
+                                <i class="fas fa-shield-check mr-2"></i>SECURE
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Scanning Animation -->
+                    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full animate-pulse"></div>
+                </div>
+
+                <!-- Video Container -->
+                <div class="aspect-video bg-black relative group">
+                    <iframe src="{{ streaming_links[0] }}" 
+                            class="w-full h-full border-0" 
+                            allowfullscreen
+                            loading="eager">
+                    </iframe>
+
+                    <!-- Loading State Overlay -->
+                    <div class="absolute inset-0 bg-black/90 flex items-center justify-center group-hover:opacity-0 transition-opacity duration-500 pointer-events-none">
+                        <div class="text-center text-white">
+                            <div class="w-16 h-16 border-4 border-blue-400 border-t-transparent rounded-full animate-spin mx-auto mb-6"></div>
+                            <div class="flex space-x-2 justify-center mb-4">
+                                <div class="w-3 h-3 bg-blue-400 rounded-full animate-bounce"></div>
+                                <div class="w-3 h-3 bg-purple-500 rounded-full animate-bounce" style="animation-delay: 0.2s;"></div>
+                                <div class="w-3 h-3 bg-pink-500 rounded-full animate-bounce" style="animation-delay: 0.4s;"></div>
+                            </div>
+                            <p class="text-xl font-orbitron font-bold animate-pulse">INITIALIZING.NEURAL.STREAM</p>
+                            <p class="text-sm text-gray-400 font-mono mt-2">Quantum decryption in progress...</p>
+                        </div>
+                    </div>
+
+                    <!-- Stream Info Overlay -->
+                    <div class="absolute top-4 left-4 glass-cyber px-4 py-2 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div class="flex items-center space-x-2 text-white font-mono text-sm">
+                            <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                            <span>STREAM.ACTIVE</span>
+                        </div>
+                    </div>
+
+                    <div class="absolute top-4 right-4 glass-cyber px-4 py-2 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div class="flex items-center space-x-2 text-white font-mono text-sm">
+                            <i class="fas fa-hd-video text-blue-400"></i>
+                            <span>4K.READY</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Player Controls -->
+                <div class="bg-black/50 p-6 border-t border-blue-500/30">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-4">
+                            <button onclick="copyLink('{{ streaming_links[0] }}')" 
+                                    class="flex items-center space-x-2 glass-cyber px-4 py-2 rounded-xl text-blue-400 hover-cyber transition-all duration-300">
+                                <i class="fas fa-copy"></i>
+                                <span class="font-mono font-bold">COPY.LINK</span>
+                            </button>
+                            <button class="flex items-center space-x-2 glass-cyber px-4 py-2 rounded-xl text-purple-400 hover-cyber transition-all duration-300">
+                                <i class="fas fa-share"></i>
+                                <span class="font-mono font-bold">SHARE.STREAM</span>
+                            </button>
+                        </div>
+
+                        <div class="text-gray-400 font-mono text-sm">
+                            <i class="fas fa-info-circle mr-2"></i>
+                            If stream fails, try alternative sources below
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Alternative Stream Sources -->
+        <div class="animate-fade-in" style="animation-delay: 0.3s;">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-orbitron font-bold text-white mb-4">
+                    <span class="text-neon-gradient animate-neon-glow">ALTERNATIVE.STREAM.SOURCES</span>
+                </h2>
+                <p class="text-xl text-gray-400 font-mono">Backup neural networks for maximum reliability</p>
+            </div>
+
+            <div class="grid gap-8">
+                {% for link in streaming_links %}
+                <div class="group hover-cyber glass-neon rounded-3xl overflow-hidden shadow-2xl cyber-border">
+                    <div class="flex flex-col xl:flex-row">
+                        <!-- Source Information -->
+                        <div class="flex-1 p-8">
+                            <div class="flex items-center space-x-6 mb-8">
+                                <div class="w-16 h-16 bg-neon-gradient rounded-2xl flex items-center justify-center animate-float group-hover:animate-glow">
+                                    <i class="fas fa-server text-white text-2xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-2xl font-orbitron font-bold text-white group-hover:text-blue-400 transition-colors">
+                                        NEURAL.SOURCE.{{ loop.index }}
+                                    </h3>
+                                    <p class="text-gray-400 font-mono">Quantum-encrypted streaming gateway</p>
+                                </div>
+                            </div>
+
+                            <!-- Source URL Display -->
+                            <div class="mb-8">
+                                <p class="text-sm text-gray-500 font-mono mb-3 flex items-center space-x-2">
+                                    <i class="fas fa-link text-blue-400"></i>
+                                    <span>STREAM.PATH:</span>
+                                </p>
+                                <div class="glass-cyber p-4 rounded-xl">
+                                    <p class="text-sm text-blue-400 font-mono break-all">
+                                        {{ link[:120] }}{% if link|length > 120 %}...{% endif %}
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Stream Specifications -->
+                            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                                <div class="glass-cyber p-4 rounded-xl text-center">
+                                    <div class="text-green-400 text-2xl font-orbitron font-bold animate-pulse">HD</div>
+                                    <div class="text-gray-400 text-xs font-mono">QUALITY</div>
+                                </div>
+                                <div class="glass-cyber p-4 rounded-xl text-center">
+                                    <div class="text-blue-400 text-2xl font-orbitron font-bold animate-pulse">60</div>
+                                    <div class="text-gray-400 text-xs font-mono">FPS</div>
+                                </div>
+                                <div class="glass-cyber p-4 rounded-xl text-center">
+                                    <div class="text-purple-400 text-2xl font-orbitron font-bold animate-pulse">5G</div>
+                                    <div class="text-gray-400 text-xs font-mono">SPEED</div>
+                                </div>
+                                <div class="glass-cyber p-4 rounded-xl text-center">
+                                    <div class="text-pink-400 text-2xl font-orbitron font-bold animate-pulse">SSL</div>
+                                    <div class="text-gray-400 text-xs font-mono">SECURE</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Control Panel -->
+                        <div class="xl:w-96 bg-black/30 p-8 flex flex-col justify-center space-y-4">
+                            <a href="{{ link }}" 
+                               target="_blank" 
+                               class="flex items-center justify-center space-x-3 bg-neon-gradient text-white py-4 px-6 rounded-2xl font-orbitron font-bold hover-cyber shadow-2xl transition-all duration-500 relative overflow-hidden group">
+                                <i class="fas fa-external-link-alt text-xl"></i>
+                                <span>LAUNCH.EXTERNAL</span>
+
+                                <!-- Button Animation -->
+                                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                            </a>
+
+                            <button onclick="copyLink('{{ link }}')" 
+                                    class="flex items-center justify-center space-x-3 glass-cyber text-blue-400 py-4 px-6 rounded-2xl font-orbitron font-bold hover-cyber transition-all duration-300 cyber-border">
+                                <i class="fas fa-copy text-xl"></i>
+                                <span>COPY.URL</span>
+                            </button>
+
+                            <button onclick="embedSource({{ loop.index0 }}, '{{ link }}')"
+                                    class="flex items-center justify-center space-x-3 glass-cyber text-purple-400 py-4 px-6 rounded-2xl font-orbitron font-bold hover-cyber transition-all duration-300 cyber-border">
+                                <i class="fas fa-download text-xl"></i>
+                                <span>EMBED.HERE</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Stream Status Bar -->
+                    <div class="bg-gradient-to-r from-green-900/20 to-blue-900/20 px-8 py-4 border-t border-green-500/20">
+                        <div class="flex items-center justify-between text-sm font-mono">
+                            <div class="flex items-center space-x-6">
+                                <div class="flex items-center space-x-2 text-green-400">
+                                    <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                                    <span>SERVER.ONLINE</span>
+                                </div>
+                                <div class="flex items-center space-x-2 text-blue-400">
+                                    <i class="fas fa-tachometer-alt"></i>
+                                    <span>LOW.LATENCY</span>
+                                </div>
+                                <div class="flex items-center space-x-2 text-purple-400">
+                                    <i class="fas fa-shield-check"></i>
+                                    <span>ENCRYPTED</span>
+                                </div>
+                            </div>
+                            <div class="text-gray-400">
+                                SOURCE {{ loop.index }} OF {{ streaming_links|length }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% else %}
+<!-- System Error Display -->
+<section class="py-24 bg-gradient-to-b from-red-900/20 to-black relative overflow-hidden">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="glass-neon rounded-3xl p-16 shadow-2xl cyber-border animate-scale-in">
+            <!-- Error Icon -->
+            <div class="w-32 h-32 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-12 animate-pulse">
+                <i class="fas fa-exclamation-triangle text-red-400 text-6xl"></i>
+            </div>
+
+            <!-- Error Message -->
+            <h2 class="text-4xl font-orbitron font-bold text-red-400 mb-8 animate-neon-glow">
+                STREAM.ERROR
+            </h2>
+
+            <p class="text-xl text-white mb-12 font-mono leading-relaxed">
+                Neural network connection failed. Stream sources unavailable.
+            </p>
+
+            <!-- Error Diagnostics -->
+            <div class="grid md:grid-cols-2 gap-8 mb-12 text-left">
+                <div class="glass-cyber p-8 rounded-2xl">
+                    <h4 class="font-orbitron font-bold text-red-400 mb-4 flex items-center space-x-2">
+                        <i class="fas fa-language"></i>
+                        <span>LANGUAGE.ERROR</span>
+                    </h4>
+                    <ul class="text-gray-300 space-y-2 text-sm font-mono">
+                        <li>• Episode not available in selected language mode</li>
+                        <li>• Try switching between SUB and DUB protocols</li>
+                        <li>• Some episodes have limited language support</li>
+                    </ul>
+                </div>
+
+                <div class="glass-cyber p-8 rounded-2xl">
+                    <h4 class="font-orbitron font-bold text-red-400 mb-4 flex items-center space-x-2">
+                        <i class="fas fa-server"></i>
+                        <span>SYSTEM.ERROR</span>
+                    </h4>
+                    <ul class="text-gray-300 space-y-2 text-sm font-mono">
+                        <li>• Temporary neural network maintenance</li>
+                        <li>• Source database synchronization issues</li>
+                        <li>• Quantum tunnel connectivity problems</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Recovery Actions -->
+            <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                <a href="javascript:history.back()" 
+                   class="flex items-center justify-center space-x-3 bg-red-600 text-white py-4 px-8 rounded-2xl font-orbitron font-bold hover-cyber shadow-2xl transition-all duration-500">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>RETRY.EPISODE</span>
+                </a>
+
+                <button onclick="location.reload()" 
+                        class="flex items-center justify-center space-x-3 glass-cyber text-blue-400 py-4 px-8 rounded-2xl font-orbitron font-bold hover-cyber shadow-2xl transition-all duration-500 cyber-border">
+                    <i class="fas fa-refresh"></i>
+                    <span>RELOAD.SYSTEM</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Navigation Control -->
+<section class="py-20 bg-neon-gradient relative overflow-hidden">
+    <div class="absolute inset-0 bg-black/60"></div>
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+        <h3 class="text-4xl font-orbitron font-bold text-white mb-8 animate-slide-up">
+            NAVIGATION.PROTOCOL
+        </h3>
+        <p class="text-xl text-white/90 mb-12 max-w-2xl mx-auto font-mono leading-relaxed">
+            Continue your journey through the anime neural network
+        </p>
+        <div class="flex flex-col sm:flex-row gap-6 justify-center">
+            <a href="javascript:history.back()" 
+               class="group flex items-center justify-center space-x-4 bg-black text-white py-6 px-12 rounded-2xl font-orbitron font-bold hover-cyber shadow-2xl transition-all duration-500 cyber-border">
+                <i class="fas fa-arrow-left text-2xl group-hover:animate-bounce text-blue-400"></i>
+                <span>EPISODE.LIST</span>
+            </a>
+            <a href="/" 
+               class="group flex items-center justify-center space-x-4 glass-cyber text-white py-6 px-12 rounded-2xl font-orbitron font-bold hover-cyber shadow-2xl transition-all duration-500 border border-white/30">
+                <i class="fas fa-home text-2xl group-hover:animate-bounce text-purple-400"></i>
+                <span>MAIN.TERMINAL</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- System Notification -->
+<div id="toast" class="fixed bottom-8 right-8 transform translate-x-full transition-transform duration-500 z-50">
+    <div class="glass-neon text-white px-8 py-6 rounded-2xl shadow-2xl backdrop-blur-sm cyber-border">
+        <div class="flex items-center space-x-4">
+            <i class="fas fa-check-circle text-2xl text-green-400 animate-pulse"></i>
+            <div>
+                <div class="font-orbitron font-bold text-lg">LINK.COPIED</div>
+                <div class="text-sm opacity-90 font-mono">Data transferred to neural clipboard</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function copyLink(link) {
+    navigator.clipboard.writeText(link).then(function() {
+        showToast();
+    }).catch(function() {
+        // Fallback method
+        const textArea = document.createElement('textarea');
+        textArea.value = link;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        showToast();
+    });
+}
+
+function showToast() {
+    const toast = document.getElementById('toast');
+    toast.classList.remove('translate-x-full');
+    setTimeout(() => {
+        toast.classList.add('translate-x-full');
+    }, 4000);
+}
+
+function embedSource(index, link) {
+    const featuredPlayer = document.querySelector('.aspect-video iframe');
+    if (featuredPlayer) {
+        featuredPlayer.src = link;
+
+        // Scroll to player
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+
+        // Show feedback
+        const toast = document.getElementById('toast');
+        const toastContent = toast.querySelector('.glass-neon');
+        toastContent.innerHTML = `
+            <div class="flex items-center space-x-4">
+                <i class="fas fa-tv text-2xl text-blue-400 animate-pulse"></i>
+                <div>
+                    <div class="font-orbitron font-bold text-lg">STREAM.UPDATED</div>
+                    <div class="text-sm opacity-90 font-mono">Now playing source ${index + 1}</div>
+                </div>
+            </div>
+        `;
+        showToast();
+    }
+}
+
+// Enhanced cyber effects
+document.addEventListener('DOMContentLoaded', function() {
+    // Add glitch effect to neon elements
+    setInterval(() => {
+        const neonElements = document.querySelectorAll('.text-neon-gradient, .animate-neon-glow');
+        neonElements.forEach(el => {
+            el.style.filter = `hue-rotate(${Math.random() * 360}deg) saturate(${100 + Math.random() * 100}%)`;
+            setTimeout(() => {
+                el.style.filter = '';
+            }, 200);
+        });
+    }, 6000);
+
+    // Add cyber scanning effect
+    const scanLine = document.createElement('div');
+    scanLine.className = 'fixed top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-blue-400 to-transparent opacity-30 pointer-events-none z-50';
+    scanLine.style.animation = 'slideDown 8s linear infinite';
+    document.body.appendChild(scanLine);
+});
+</script>
+{% endblock %}

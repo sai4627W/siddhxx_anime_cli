@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Siddhxx Anime Stream{% endblock %}</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'orbitron': ['Orbitron', 'sans-serif'],
+                        'inter': ['Inter', 'sans-serif'],
+                        'mono': ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        'neon': {
+                            'blue': '#00D2FF',
+                            'purple': '#B445FF', 
+                            'pink': '#FF006E',
+                            'green': '#00FF88',
+                            'yellow': '#FFD700',
+                            'red': '#FF1744',
+                            'cyan': '#00FFFF',
+                        }
+                    },
+                    animation: {
+                        'gradient': 'gradient 4s ease infinite',
+                        'float': 'float 3s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'pulse-neon': 'pulseNeon 2s ease-in-out infinite',
+                        'slide-up': 'slideUp 0.8s ease-out',
+                        'slide-left': 'slideLeft 0.8s ease-out',
+                        'fade-in': 'fadeIn 1s ease-out',
+                        'scale-in': 'scaleIn 0.5s ease-out',
+                        'cyber-pulse': 'cyberPulse 1.5s ease-in-out infinite',
+                        'neon-glow': 'neonGlow 2s ease-in-out infinite alternate',
+                        'matrix-rain': 'matrixRain 20s linear infinite',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        @keyframes glow {
+            from { box-shadow: 0 0 20px rgba(0, 210, 255, 0.5); }
+            to { box-shadow: 0 0 40px rgba(0, 210, 255, 0.8), 0 0 60px rgba(180, 69, 255, 0.6); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(100px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideLeft {
+            from { opacity: 0; transform: translateX(100px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.5); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes pulseNeon {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        @keyframes cyberPulse {
+            0%, 100% { border-color: rgba(0, 210, 255, 0.5); }
+            50% { border-color: rgba(180, 69, 255, 0.8); }
+        }
+
+        @keyframes neonGlow {
+            from { text-shadow: 0 0 10px #00D2FF; }
+            to { text-shadow: 0 0 20px #00D2FF, 0 0 30px #B445FF; }
+        }
+
+        @keyframes matrixRain {
+            0% { transform: translateY(-100vh); opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+
+        /* Dark Theme Gradients */
+        .bg-dark-cyber {
+            background: linear-gradient(135deg, #0a0014 0%, #1a0028 25%, #2d0041 50%, #4a0e4e 75%, #16213e 100%);
+            background-size: 400% 400%;
+            animation: gradient 8s ease infinite;
+        }
+
+        .bg-neon-gradient {
+            background: linear-gradient(45deg, #00D2FF, #B445FF, #FF006E, #00FF88);
+            background-size: 300% 300%;
+            animation: gradient 6s ease infinite;
+        }
+
+        /* Glass Effects */
+        .glass-cyber {
+            background: rgba(10, 0, 20, 0.3);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 210, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        .glass-neon {
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(180, 69, 255, 0.4);
+            box-shadow: 0 0 30px rgba(0, 210, 255, 0.2);
+        }
+
+        /* Neon Text */
+        .text-neon-gradient {
+            background: linear-gradient(45deg, #00D2FF, #B445FF, #FF006E);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient 4s ease infinite;
+            background-size: 300% 300%;
+        }
+
+        /* Hover Effects */
+        .hover-cyber {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hover-cyber:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(0, 210, 255, 0.3);
+        }
+
+        /* Cyber Border */
+        .cyber-border {
+            border: 2px solid transparent;
+            background: linear-gradient(45deg, #0a0014, #1a0028) padding-box,
+                        linear-gradient(45deg, #00D2FF, #B445FF) border-box;
+            animation: cyberPulse 2s ease-in-out infinite;
+        }
+
+        /* Matrix Characters */
+        .matrix-char {
+            position: absolute;
+            color: #00D2FF;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            animation: matrixRain linear infinite;
+            opacity: 0.3;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0014;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, #00D2FF, #B445FF);
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body class="font-inter bg-dark-cyber text-white overflow-x-hidden">
+    <!-- Matrix Rain Effect -->
+    <div class="fixed inset-0 pointer-events-none z-0" id="matrixBg"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 glass-neon backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-18">
+                <div class="flex items-center space-x-4">
+                    <a href="/" class="flex items-center space-x-3 group">
+                        <div class="w-12 h-12 bg-neon-gradient rounded-xl flex items-center justify-center animate-float hover:animate-glow">
+                            <i class="fas fa-play text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <span class="text-2xl font-orbitron font-bold text-neon-gradient animate-neon-glow">SIDDHXX</span>
+                            <div class="text-xs text-blue-400 font-mono">ANIME.STREAM</div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="flex items-center space-x-6">
+                    <div class="flex items-center space-x-2 glass-cyber px-3 py-1 rounded-full">
+                        <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                        <span class="text-green-400 text-sm font-bold">LIVE</span>
+                    </div>
+
+                    <a href="/" class="flex items-center space-x-2 px-4 py-2 rounded-lg glass-cyber hover-cyber transition-all duration-300 text-blue-400 hover:text-white">
+                        <i class="fas fa-home"></i>
+                        <span class="font-medium">HOME</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-18 min-h-screen">
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="fixed top-20 right-4 z-40 space-y-2">
+                    {% for category, message in messages %}
+                        <div class="alert-{{ category }} animate-slide-left">
+                            <div class="{% if category == 'error' %}glass-neon border-red-500{% else %}glass-neon border-green-400{% endif %} text-white px-6 py-4 rounded-xl shadow-2xl">
+                                <div class="flex items-center space-x-3">
+                                    <i class="fas {% if category == 'error' %}fa-exclamation-circle text-red-400{% else %}fa-check-circle text-green-400{% endif %} text-xl animate-pulse-neon"></i>
+                                    <span class="font-medium">{{ message }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark-cyber border-t border-blue-500/20 mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="text-center space-y-6">
+                <div class="flex justify-center">
+                    <div class="w-16 h-16 bg-neon-gradient rounded-2xl flex items-center justify-center animate-float">
+                        <i class="fas fa-play text-white text-2xl"></i>
+                    </div>
+                </div>
+                <h3 class="text-3xl font-orbitron font-bold text-neon-gradient animate-neon-glow">SIDDHXX ANIME STREAM</h3>
+                <p class="text-gray-400 max-w-md mx-auto">
+                    Experience the future of anime streaming with cutting-edge cyberpunk aesthetics
+                </p>
+                <div class="pt-6 border-t border-blue-500/20">
+                    <p class="text-sm text-gray-500 font-mono">
+                        &copy; 2025 SIDDHXX • CRAFTED WITH <span class="text-pink-400">❤️</span> FOR OTAKUS
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Background Effects -->
+    <div class="fixed inset-0 pointer-events-none z-0">
+        <div class="absolute top-20 left-10 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl animate-float"></div>
+        <div class="absolute top-40 right-20 w-48 h-48 bg-purple-500/10 rounded-full blur-3xl animate-float" style="animation-delay: 1s;"></div>
+        <div class="absolute bottom-40 left-1/3 w-40 h-40 bg-pink-500/10 rounded-full blur-3xl animate-float" style="animation-delay: 2s;"></div>
+    </div>
+
+    <script>
+        // Matrix Rain Effect
+        function createMatrix() {
+            const matrix = document.getElementById('matrixBg');
+            const chars = '01ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜｦﾝ';
+
+            for (let i = 0; i < 50; i++) {
+                const char = document.createElement('div');
+                char.className = 'matrix-char';
+                char.textContent = chars[Math.floor(Math.random() * chars.length)];
+                char.style.left = Math.random() * 100 + '%';
+                char.style.animationDuration = (Math.random() * 15 + 10) + 's';
+                char.style.animationDelay = Math.random() * 10 + 's';
+                matrix.appendChild(char);
+            }
+        }
+
+        // Auto-hide messages
+        setTimeout(() => {
+            document.querySelectorAll('[class*="alert-"]').forEach(el => {
+                el.style.transform = 'translateX(400px)';
+                el.style.opacity = '0';
+                setTimeout(() => el.remove(), 500);
+            });
+        }, 5000);
+
+        // Loading function
+        function showLoading(elementId, text = 'LOADING') {
+            const element = document.getElementById(elementId);
+            if (element) {
+                element.innerHTML = `
+                    <div class="flex items-center justify-center space-x-3">
+                        <div class="w-5 h-5 border-2 border-blue-400 border-t-transparent rounded-full animate-spin"></div>
+                        <span class="font-orbitron font-bold text-blue-400">${text}</span>
+                    </div>
+                `;
+                element.disabled = true;
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            createMatrix();
+        });
+    </script>
+</body>
+</html>
